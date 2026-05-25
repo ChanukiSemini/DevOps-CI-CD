@@ -1,41 +1,23 @@
 name: Java CI Pipeline
 
 on:
-   push:
-    branchs:
-     - main
+  push:
+    branches:
+      - main
 
 jobs:
-   build:
-
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    -name: Checkout Repository
-    uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    -name: Set Up JDK
-    uses: actions/setup-java@v4
-    with:
-      distribution:'temurin'
-      java-version:17
-    
-    -name: Compile java Files
-    run: javac*.java
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    -name: Run Main Program
-    run: java Main
-
-    -name: Run Test
-    run: Java Calculator Test
-
-    -name: Run custom Action
-    uses: ./.github/actions/java-build
-
-
-  
-
-
-
-
-    
+      - name: Build Project
+        run: mvn clean install
