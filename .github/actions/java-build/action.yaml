@@ -1,26 +1,22 @@
-name: Java CI Pipeline
+name: "Greeting Action"
 
-on:
-  push:
-    branches:
-      - main
+description: "Receives name and returns message"
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+inputs:
+ username:
+  required: true
+  description: "User name"
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+outputs:
+ message:
+  description: "Greeting message"
 
-      - name: Set Up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+runs:
+ using: "composite"
 
-      - name: Compile Java Program
-        run: javac Main.java
+ steps:
+  -name: Create Greeting
+  run: echo "message=Hello ${{ inputs.username}}" >> $GITHUB_OUTPUT
+  shell: bash
 
-      - name: Run Java Program
-        run: java Main
+
