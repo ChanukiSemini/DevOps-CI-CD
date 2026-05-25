@@ -20,11 +20,20 @@ jobs:
       distribution:'temurin'
       java-version:17
     
-    -name: Compile java Program
-    run: javac Main.java
+    -name: Compile java Files
+    run: javac*.java
 
-    -name: Run java Program
+    -name: Run Main Program
     run: java Main
+
+    -name: Run Test
+    run: Java Calculator Test
+
+    -name: Run custom Action
+    uses: ./.github/actions/java-build
+
+
+  
 
 
 
